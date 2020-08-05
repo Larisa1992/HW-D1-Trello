@@ -30,14 +30,9 @@ def read():
     # Теперь выведем название каждой колонки и всех заданий, которые к ней относятся:      
     for column in column_data:
         print(column['name'])
-        # print(get_column_name(column['name']))
         # Получим данные всех задач в колонке и перечислим все названия      
         task_data = requests.get(base_url.format('lists') + '/' + column['id'] + '/cards', params=auth_params).json()
         
-        # print('task_data', len(task_data))
-        # new_label = str(len(task_data)) + ' ' + column['name']
-        
-        # requests.put(base_url.format('lists') + '/' + column['id'], params = {'name': new_label, **auth_params})
         # добавляем в название колонки к-во задач (карточек) в ней
         update_label(column['id'], column['name'])
 
@@ -72,26 +67,15 @@ def move(name, column_name):
         column_tasks = requests.get(base_url.format('lists') + '/' + column['id'] + '/cards', params=auth_params).json()  
         for task in column_tasks:
             if task['name'] == name:
-                # task_id = task['id']
                 arr_tasks.append({'id': task['id'], 'idShort': task['idShort'], 'idList': task['idList'], 'column': column['name']})
     
     for i in range(len(arr_tasks)):
         print('Порядковый номер {}) Задача из колонки с названием "{}"'.format(i, arr_tasks[i]['column']))
-        # for task in arr.items():
-        #     print(task)
-                # break
-        # if task_id:
-        #     break
+
     arr_tasks_index = int(input('Введите порядковый номер задачи для дальнейшей обработки \n'))
     task_id = arr_tasks[arr_tasks_index]['id']
     column_id = arr_tasks[arr_tasks_index]['idList'] #из этой колонки будем удалять карточку
     column_old = arr_tasks[arr_tasks_index]['column']
-
-    # for arr in arr_tasks:
-    #     print('arr["idShort"] = ', arr['idShort'], arr)
-        # for task in arr.items():
-        #     if task['idShort'] == task_input:
-        #         print('task_id = ', task['task_id'])
 
     # Теперь, когда у нас есть id задачи, которую мы хотим переместить    
     # Переберём данные обо всех колонках, пока не найдём ту, в которую мы будем перемещать задачу    
