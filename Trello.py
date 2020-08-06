@@ -70,7 +70,7 @@ def move(name, column_name):
                 arr_tasks.append({'id': task['id'], 'idShort': task['idShort'], 'idList': task['idList'], 'column': column['name']})
     
     for i in range(len(arr_tasks)):
-        print('Порядковый номер {}) Задача из колонки с названием "{}"'.format(i, arr_tasks[i]['column']))
+        print('Порядковый номер {}) Задача с идентификатором "{}" из колонки с названием "{}"'.format(i, arr_tasks[i]['id'], arr_tasks[i]['column']))
 
     arr_tasks_index = int(input('Введите порядковый номер задачи для дальнейшей обработки \n'))
     task_id = arr_tasks[arr_tasks_index]['id']
